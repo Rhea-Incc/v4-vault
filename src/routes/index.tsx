@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { FloatingNav } from "@/components/vault/FloatingNav";
+import { Hero } from "@/components/vault/Hero";
+import { FeaturedGrid } from "@/components/vault/FeaturedGrid";
+import { CategoryRail } from "@/components/vault/CategoryRail";
+import { ValueProps } from "@/components/vault/ValueProps";
+import { AccessoryCarousel } from "@/components/vault/AccessoryCarousel";
+import { Footer } from "@/components/vault/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "The Vault — Apple Authorized Reseller" },
+      {
+        name: "description",
+        content:
+          "An immersive premium shopping experience for Mac, iPhone, iPad, Apple Watch, AirPods, and accessories. Meticulously curated by The Vault.",
+      },
+      { property: "og:title", content: "The Vault — Apple Authorized Reseller" },
+      {
+        property: "og:description",
+        content:
+          "A luxury technology gallery for Apple products. Precision, calm, confidence.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-dvh bg-background">
+      <FloatingNav />
+      <main>
+        <Hero />
+        <FeaturedGrid />
+        <CategoryRail />
+        <ValueProps />
+        <AccessoryCarousel />
+      </main>
+      <Footer />
     </div>
   );
 }
