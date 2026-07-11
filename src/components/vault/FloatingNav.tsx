@@ -46,12 +46,23 @@ export function FloatingNav() {
           <ul className="hidden items-center gap-1 lg:flex">
             {NAV.map((item) => (
               <li key={item}>
-                <button className="rounded-full px-4 py-2 text-sm text-foreground/80 transition-colors duration-300 hover:text-foreground">
-                  {item}
-                </button>
+                {item === "iPhone" ? (
+                  <Link
+                    to="/iphone"
+                    className="inline-block rounded-full px-4 py-2 text-sm text-foreground/80 transition-colors duration-300 hover:text-foreground"
+                    activeProps={{ className: "text-foreground" }}
+                  >
+                    {item}
+                  </Link>
+                ) : (
+                  <button className="rounded-full px-4 py-2 text-sm text-foreground/80 transition-colors duration-300 hover:text-foreground">
+                    {item}
+                  </button>
+                )}
               </li>
             ))}
           </ul>
+
 
           <div className="flex items-center gap-1">
             <button
