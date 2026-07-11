@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "A luxury technology gallery for Apple products. Precision, calm, confidence.",
+          "An immersive premium shopping experience for Mac, iPhone, iPad, Apple Watch, AirPods, and accessories. Meticulously curated by The Vault.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
