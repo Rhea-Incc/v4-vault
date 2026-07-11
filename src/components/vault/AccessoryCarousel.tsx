@@ -1,9 +1,13 @@
-const ACCESSORIES = Array.from({ length: 8 }).map((_, i) => ({
-  id: i,
-  name: "{{Product Name}}",
-  category: "{{Category}}",
-  price: "{{Price}}",
-}));
+const ACCESSORIES = [
+  { id: 0, name: "MagSafe Charger", category: "Power", price: "$39" },
+  { id: 1, name: "AirPods Pro 2", category: "Audio", price: "$249" },
+  { id: 2, name: "FineWoven Case", category: "Cases", price: "$59" },
+  { id: 3, name: "Apple Watch Band", category: "Wearables", price: "$49" },
+  { id: 4, name: "USB-C to Lightning", category: "Cables", price: "$19" },
+  { id: 5, name: "Magic Keyboard", category: "Input", price: "$129" },
+  { id: 6, name: "Studio Display Stand", category: "Displays", price: "$399" },
+  { id: 7, name: "AppleCare+", category: "Coverage", price: "$199" },
+];
 
 export function AccessoryCarousel() {
   return (
