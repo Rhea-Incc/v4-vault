@@ -120,11 +120,23 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  html, body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-text);
+    font-feature-settings: "ss01", "cv11";
+    letter-spacing: -0.011em;
+  }
+
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-text);
@@ -183,6 +195,12 @@
     transform: translateY(-6px);
     box-shadow: var(--shadow-lift);
   }
+}
+
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
 }
 
 @utility btn-pill {
