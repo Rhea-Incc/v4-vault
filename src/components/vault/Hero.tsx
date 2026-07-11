@@ -8,15 +8,14 @@ export function Hero() {
         <div className="flex flex-col items-center text-center animate-rise">
           <p className="eyebrow mb-6">New · Available Now</p>
           <h1 className="hero-headline text-foreground">
-            {"{{Product Name}}."}
+            iPhone 17 Pro.
             <br />
             <span className="text-muted-foreground">
               Precision, refined.
             </span>
           </h1>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground sm:text-xl">
-            {"{{Description}}"} — a supporting sentence that lets the product
-            breathe.
+            Forged in aerospace-grade titanium. A camera system rewritten from the sensor up.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <button className="btn-pill bg-foreground text-background hover:bg-foreground/90">
@@ -27,7 +26,7 @@ export function Hero() {
             </button>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
-            From {"{{Price}}"} · or {"{{Price}}"}/mo. for 24 mo.
+            From $1,199 · or $49.95/mo. for 24 mo.
           </p>
         </div>
 
