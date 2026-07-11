@@ -197,6 +197,12 @@
   }
 }
 
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
 @utility btn-pill {
   display: inline-flex;
   align-items: center;
