@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IphoneRouteImport } from './routes/iphone'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as IphoneIndexRouteImport } from './routes/iphone.index'
 
 const IphoneRoute = IphoneRouteImport.update({
   id: '/iphone',
@@ -22,31 +23,38 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IphoneIndexRoute = IphoneIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => IphoneRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/iphone': typeof IphoneRoute
+  '/iphone': typeof IphoneRouteWithChildren
+  '/iphone/': typeof IphoneIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/iphone': typeof IphoneRoute
+  '/iphone': typeof IphoneIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/iphone': typeof IphoneRoute
+  '/iphone': typeof IphoneRouteWithChildren
+  '/iphone/': typeof IphoneIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/iphone'
+  fullPaths: '/' | '/iphone' | '/iphone/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/iphone'
-  id: '__root__' | '/' | '/iphone'
+  id: '__root__' | '/' | '/iphone' | '/iphone/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  IphoneRoute: typeof IphoneRoute
+  IphoneRoute: typeof IphoneRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +73,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/iphone/': {
+      id: '/iphone/'
+      path: '/'
+      fullPath: '/iphone/'
+      preLoaderRoute: typeof IphoneIndexRouteImport
+      parentRoute: typeof IphoneRoute
+    }
   }
 }
 
+interface IphoneRouteChildren {
+  IphoneIndexRoute: typeof IphoneIndexRoute
+}
+
+const IphoneRouteChildren: IphoneRouteChildren = {
+  IphoneIndexRoute: IphoneIndexRoute,
+}
+
+const IphoneRouteWithChildren =
+  IphoneRoute._addFileChildren(IphoneRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  IphoneRoute: IphoneRoute,
+  IphoneRoute: IphoneRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
