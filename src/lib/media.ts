@@ -19,24 +19,16 @@ const CONFIGURED_ORIGIN = (
   import.meta.env.VITE_MEDIA_BASE_URL as string | undefined
 )?.replace(/\/$/, "");
 
-/** True when the current runtime is served by Lovable hosting/preview. */
-function isLovableHost(): boolean {
-  if (typeof window === "undefined") return false;
-  return /(^|\.)lovable\.(app|dev)$/.test(window.location.hostname) ||
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1";
-}
+/**
+ * Resolution is deterministic across server and client (no `window` branching)
+ * so SSR markup and hydrated markup always agree.
+ */
+const MEDIA_ORIGIN = CONFIGURED_ORIGIN ?? (import.meta.env.DEV ? "" : DEFAULT_MEDIA_ORIGIN);
 
 export function mediaUrl(input: AssetPointer | string): string {
   const raw = typeof input === "string" ? input : input.url;
   if (/^(https?:)?\/\//.test(raw) || raw.startsWith("data:")) return raw;
-
-  if (CONFIGURED_ORIGIN) return `${CONFIGURED_ORIGIN}${raw}`;
-  // On Lovable (and local dev) the relative path is served directly.
-  if (isLovableHost()) return raw;
-  // SSR / unknown external host: always emit an absolute, universally
-  // reachable URL so any deployment target can serve the media.
-  return `${DEFAULT_MEDIA_ORIGIN}${raw}`;
+  return `${MEDIA_ORIGIN}${raw}`;
 }
 
 /** Responsive `sizes` presets shared across the media components. */
