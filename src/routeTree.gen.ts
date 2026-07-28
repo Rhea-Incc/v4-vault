@@ -9,12 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MacRouteImport } from './routes/mac'
 import { Route as IphoneRouteImport } from './routes/iphone'
+import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as IphoneIndexRouteImport } from './routes/iphone.index'
+import { Route as IphoneModelRouteImport } from './routes/iphone.$model'
 
+const MacRoute = MacRouteImport.update({
+  id: '/mac',
+  path: '/mac',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IphoneRoute = IphoneRouteImport.update({
   id: '/iphone',
   path: '/iphone',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccessoriesRoute = AccessoriesRouteImport.update({
+  id: '/accessories',
+  path: '/accessories',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,40 +36,90 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IphoneIndexRoute = IphoneIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => IphoneRoute,
+} as any)
+const IphoneModelRoute = IphoneModelRouteImport.update({
+  id: '/$model',
+  path: '/$model',
+  getParentRoute: () => IphoneRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/iphone': typeof IphoneRoute
+  '/accessories': typeof AccessoriesRoute
+  '/iphone': typeof IphoneRouteWithChildren
+  '/mac': typeof MacRoute
+  '/iphone/$model': typeof IphoneModelRoute
+  '/iphone/': typeof IphoneIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/iphone': typeof IphoneRoute
+  '/accessories': typeof AccessoriesRoute
+  '/mac': typeof MacRoute
+  '/iphone/$model': typeof IphoneModelRoute
+  '/iphone': typeof IphoneIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/iphone': typeof IphoneRoute
+  '/accessories': typeof AccessoriesRoute
+  '/iphone': typeof IphoneRouteWithChildren
+  '/mac': typeof MacRoute
+  '/iphone/$model': typeof IphoneModelRoute
+  '/iphone/': typeof IphoneIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/iphone'
+  fullPaths:
+    | '/'
+    | '/accessories'
+    | '/iphone'
+    | '/mac'
+    | '/iphone/$model'
+    | '/iphone/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/iphone'
-  id: '__root__' | '/' | '/iphone'
+  to: '/' | '/accessories' | '/mac' | '/iphone/$model' | '/iphone'
+  id:
+    | '__root__'
+    | '/'
+    | '/accessories'
+    | '/iphone'
+    | '/mac'
+    | '/iphone/$model'
+    | '/iphone/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  IphoneRoute: typeof IphoneRoute
+  AccessoriesRoute: typeof AccessoriesRoute
+  IphoneRoute: typeof IphoneRouteWithChildren
+  MacRoute: typeof MacRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/mac': {
+      id: '/mac'
+      path: '/mac'
+      fullPath: '/mac'
+      preLoaderRoute: typeof MacRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/iphone': {
       id: '/iphone'
       path: '/iphone'
       fullPath: '/iphone'
       preLoaderRoute: typeof IphoneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accessories': {
+      id: '/accessories'
+      path: '/accessories'
+      fullPath: '/accessories'
+      preLoaderRoute: typeof AccessoriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -65,12 +129,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/iphone/': {
+      id: '/iphone/'
+      path: '/'
+      fullPath: '/iphone/'
+      preLoaderRoute: typeof IphoneIndexRouteImport
+      parentRoute: typeof IphoneRoute
+    }
+    '/iphone/$model': {
+      id: '/iphone/$model'
+      path: '/$model'
+      fullPath: '/iphone/$model'
+      preLoaderRoute: typeof IphoneModelRouteImport
+      parentRoute: typeof IphoneRoute
+    }
   }
 }
 
+interface IphoneRouteChildren {
+  IphoneModelRoute: typeof IphoneModelRoute
+  IphoneIndexRoute: typeof IphoneIndexRoute
+}
+
+const IphoneRouteChildren: IphoneRouteChildren = {
+  IphoneModelRoute: IphoneModelRoute,
+  IphoneIndexRoute: IphoneIndexRoute,
+}
+
+const IphoneRouteWithChildren =
+  IphoneRoute._addFileChildren(IphoneRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  IphoneRoute: IphoneRoute,
+  AccessoriesRoute: AccessoriesRoute,
+  IphoneRoute: IphoneRouteWithChildren,
+  MacRoute: MacRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

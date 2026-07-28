@@ -9,6 +9,7 @@ import securityImg from "@/assets/product/security.jpg.asset.json";
 import esimImg from "@/assets/product/esim.jpg.asset.json";
 import spotlightImg from "@/assets/product/spotlight.jpg.asset.json";
 import macbookImg from "@/assets/product/macbook.jpg.asset.json";
+import { mediaUrl, SIZES } from "@/lib/media";
 
 const COLORS = [
   { id: "lavender", name: "Lavender", swatch: "oklch(0.82 0.08 300)" },
@@ -26,11 +27,11 @@ const STORAGE = [
 ];
 
 const GALLERY = [
-  { src: heroImg.url, caption: "Every angle, considered." },
-  { src: cameraImg.url, caption: "Three lenses. One system." },
-  { src: lockscreenImg.url, caption: "A canvas that responds." },
-  { src: batteryImg.url, caption: "All-day. And then some." },
-  { src: iosImg.url, caption: "iOS, reimagined." },
+  { src: mediaUrl(heroImg), caption: "Every angle, considered." },
+  { src: mediaUrl(cameraImg), caption: "Three lenses. One system." },
+  { src: mediaUrl(lockscreenImg), caption: "A canvas that responds." },
+  { src: mediaUrl(batteryImg), caption: "All-day. And then some." },
+  { src: mediaUrl(iosImg), caption: "iOS, reimagined." },
 ];
 
 const SPECS = [
@@ -47,10 +48,10 @@ const SPECS = [
 ];
 
 const RECOMMENDATIONS = [
-  { name: "MagSafe Charger", tag: "Accessory", price: "$39", img: macbookImg.url },
-  { name: "AirPods Pro", tag: "Audio", price: "$249", img: iosImg.url },
-  { name: "Leather Case with MagSafe", tag: "Case", price: "$59", img: lockscreenImg.url },
-  { name: "20W USB-C Adapter", tag: "Power", price: "$19", img: batteryImg.url },
+  { name: "MagSafe Charger", tag: "Accessory", price: "$39", img: mediaUrl(macbookImg) },
+  { name: "AirPods Pro", tag: "Audio", price: "$249", img: mediaUrl(iosImg) },
+  { name: "Leather Case with MagSafe", tag: "Case", price: "$59", img: mediaUrl(lockscreenImg) },
+  { name: "20W USB-C Adapter", tag: "Power", price: "$19", img: mediaUrl(batteryImg) },
 ];
 
 const COMPARE = [
@@ -104,8 +105,13 @@ export function ProductPage() {
           <div className="relative mt-14 animate-fade">
             <div className="absolute inset-x-0 -bottom-10 top-8 -z-10 rounded-[3rem] bg-gradient-to-b from-surface-elevated to-transparent" />
             <img
-              src={heroImg.url}
-              alt="iPhone 17"
+              src={mediaUrl(heroImg)}
+              alt="iPhone 17 in titanium shown from the front and back"
+              sizes={SIZES.hero}
+              width={1600}
+              height={1000}
+              fetchPriority="high"
+              decoding="async"
               className="mx-auto w-full max-w-[1100px] rounded-[2rem]"
             />
           </div>
@@ -123,7 +129,7 @@ export function ProductPage() {
             >
               {GALLERY.map((g, i) => (
                 <figure key={i} className="relative flex h-full min-h-full snap-start items-center justify-center p-6">
-                  <img src={g.src} alt={g.caption} className="max-h-full w-full rounded-[1.5rem] object-cover" />
+                  <img src={g.src} alt={g.caption} loading="lazy" decoding="async" sizes={SIZES.tile} width={1400} height={1000} className="max-h-full w-full rounded-[1.5rem] object-cover" />
                   <figcaption className="absolute inset-x-0 bottom-6 text-center text-sm text-muted-foreground">
                     {g.caption}
                   </figcaption>
@@ -230,12 +236,12 @@ export function ProductPage() {
       <section className="mx-auto mt-32 max-w-[1440px] px-6">
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { img: securityImg.url, title: "Private by design.", body: "On-device intelligence keeps your data yours." },
-            { img: esimImg.url, title: "eSIM, everywhere.", body: "Switch carriers and travel plans in seconds." },
-            { img: spotlightImg.url, title: "Find it, instantly.", body: "System-wide search meets ambient intelligence." },
+            { img: mediaUrl(securityImg), title: "Private by design.", body: "On-device intelligence keeps your data yours." },
+            { img: mediaUrl(esimImg), title: "eSIM, everywhere.", body: "Switch carriers and travel plans in seconds." },
+            { img: mediaUrl(spotlightImg), title: "Find it, instantly.", body: "System-wide search meets ambient intelligence." },
           ].map((f) => (
             <article key={f.title} className="card-lift overflow-hidden rounded-[2rem] bg-surface-elevated">
-              <img src={f.img} alt="" className="h-64 w-full object-cover" />
+              <img src={f.img} alt="" loading="lazy" decoding="async" sizes={SIZES.tile} width={1400} height={900} className="h-64 w-full object-cover" />
               <div className="p-8">
                 <h3 className="text-2xl font-semibold tracking-tight">{f.title}</h3>
                 <p className="mt-2 text-muted-foreground">{f.body}</p>
@@ -322,7 +328,12 @@ export function ProductPage() {
               <div className="aspect-square overflow-hidden">
                 <img
                   src={r.img}
-                  alt={r.name}
+                  alt={`${r.name} accessory`}
+                  loading="lazy"
+                  decoding="async"
+                  sizes={SIZES.card}
+                  width={800}
+                  height={800}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>

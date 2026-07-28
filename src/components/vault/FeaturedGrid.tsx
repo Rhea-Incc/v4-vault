@@ -2,6 +2,7 @@ import performance from "@/assets/performance.asset.json";
 import macos from "@/assets/macos.asset.json";
 import family from "@/assets/family.asset.json";
 import delight from "@/assets/delight.asset.json";
+import { mediaUrl, SIZES } from "@/lib/media";
 
 type Feature = {
   eyebrow: string;
@@ -19,7 +20,7 @@ const features: Feature[] = [
     name: "iPhone 17 Pro",
     tagline: "Titanium. Reimagined.",
     price: "From $1,199",
-    image: performance.url,
+    image: mediaUrl(performance),
     tone: "dark",
     span: "wide",
   },
@@ -28,7 +29,7 @@ const features: Feature[] = [
     name: "MacBook Pro M4",
     tagline: "Studio in a chip.",
     price: "From $1,999",
-    image: macos.url,
+    image: mediaUrl(macos),
     span: "square",
   },
   {
@@ -36,7 +37,7 @@ const features: Feature[] = [
     name: "iPad Air",
     tagline: "A world in your pocket.",
     price: "From $599",
-    image: family.url,
+    image: mediaUrl(family),
     span: "square",
   },
   {
@@ -44,18 +45,18 @@ const features: Feature[] = [
     name: "iPhone 17",
     tagline: "Colors that spark joy.",
     price: "From $899",
-    image: delight.url,
+    image: mediaUrl(delight),
     span: "wide",
   },
 ];
 
 export function FeaturedGrid() {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-32">
-      <div className="mb-14 flex items-end justify-between">
+    <section className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 sm:py-32">
+      <div className="mb-8 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:mb-14">
         <div>
           <p className="eyebrow mb-4">The Lineup</p>
-          <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
             Get the latest.
           </h2>
         </div>
@@ -132,7 +133,12 @@ function FeatureCard({ feature }: { feature: Feature }) {
       </div>
       <img
         src={feature.image}
-        alt={feature.name}
+        alt={`${feature.name} — ${feature.tagline}`}
+        loading="lazy"
+        decoding="async"
+        sizes={SIZES.tile}
+        width={1400}
+        height={900}
         className="absolute inset-x-0 bottom-0 h-[62%] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
       />
     </article>
