@@ -1,6 +1,7 @@
 import innovation from "@/assets/innovation.asset.json";
 import rear from "@/assets/rear-camera.asset.json";
 import aiApps from "@/assets/ai-apps.asset.json";
+import { mediaUrl, SIZES } from "@/lib/media";
 
 export function ValueProps() {
   return (
@@ -19,20 +20,20 @@ export function ValueProps() {
           eyebrow="Trade In"
           title="Trade up. Effortlessly."
           body="Receive an instant estimate. Apply it toward something new."
-          image={innovation.url}
+          image={mediaUrl(innovation)}
         />
         <TileLarge
           eyebrow="AppleCare"
           title="Coverage, refined."
           body="Extended service and priority support, backed by Apple."
-          image={rear.url}
+          image={mediaUrl(rear)}
           dark
         />
         <TileLarge
           eyebrow="Financing"
           title="Own it in months."
           body="0% APR available on eligible devices for qualified customers."
-          image={aiApps.url}
+          image={mediaUrl(aiApps)}
         />
       </div>
     </section>

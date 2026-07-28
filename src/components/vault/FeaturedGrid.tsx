@@ -2,6 +2,7 @@ import performance from "@/assets/performance.asset.json";
 import macos from "@/assets/macos.asset.json";
 import family from "@/assets/family.asset.json";
 import delight from "@/assets/delight.asset.json";
+import { mediaUrl, SIZES } from "@/lib/media";
 
 type Feature = {
   eyebrow: string;
@@ -19,7 +20,7 @@ const features: Feature[] = [
     name: "iPhone 17 Pro",
     tagline: "Titanium. Reimagined.",
     price: "From $1,199",
-    image: performance.url,
+    image: mediaUrl(performance),
     tone: "dark",
     span: "wide",
   },
@@ -28,7 +29,7 @@ const features: Feature[] = [
     name: "MacBook Pro M4",
     tagline: "Studio in a chip.",
     price: "From $1,999",
-    image: macos.url,
+    image: mediaUrl(macos),
     span: "square",
   },
   {
@@ -36,7 +37,7 @@ const features: Feature[] = [
     name: "iPad Air",
     tagline: "A world in your pocket.",
     price: "From $599",
-    image: family.url,
+    image: mediaUrl(family),
     span: "square",
   },
   {
@@ -44,7 +45,7 @@ const features: Feature[] = [
     name: "iPhone 17",
     tagline: "Colors that spark joy.",
     price: "From $899",
-    image: delight.url,
+    image: mediaUrl(delight),
     span: "wide",
   },
 ];
