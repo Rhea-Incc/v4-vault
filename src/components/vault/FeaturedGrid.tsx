@@ -52,11 +52,11 @@ const features: Feature[] = [
 
 export function FeaturedGrid() {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-32">
-      <div className="mb-14 flex items-end justify-between">
+    <section className="mx-auto max-w-[1440px] px-4 py-16 sm:px-6 sm:py-32">
+      <div className="mb-8 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:mb-14">
         <div>
           <p className="eyebrow mb-4">The Lineup</p>
-          <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-5xl">
             Get the latest.
           </h2>
         </div>
@@ -133,7 +133,7 @@ function FeatureCard({ feature }: { feature: Feature }) {
       </div>
       <img
         src={feature.image}
-        alt={`${feature.name} — ${feature.tagline ?? "featured product"}`}
+        alt={`${feature.name} — ${feature.tagline}`}
         loading="lazy"
         decoding="async"
         sizes={SIZES.tile}
