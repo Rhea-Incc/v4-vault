@@ -106,7 +106,12 @@ export function ProductPage() {
             <div className="absolute inset-x-0 -bottom-10 top-8 -z-10 rounded-[3rem] bg-gradient-to-b from-surface-elevated to-transparent" />
             <img
               src={mediaUrl(heroImg)}
-              alt="iPhone 17"
+              alt="iPhone 17 in titanium shown from the front and back"
+              sizes={SIZES.hero}
+              width={1600}
+              height={1000}
+              fetchPriority="high"
+              decoding="async"
               className="mx-auto w-full max-w-[1100px] rounded-[2rem]"
             />
           </div>
@@ -124,7 +129,7 @@ export function ProductPage() {
             >
               {GALLERY.map((g, i) => (
                 <figure key={i} className="relative flex h-full min-h-full snap-start items-center justify-center p-6">
-                  <img src={g.src} alt={g.caption} className="max-h-full w-full rounded-[1.5rem] object-cover" />
+                  <img src={g.src} alt={g.caption} loading="lazy" decoding="async" sizes={SIZES.tile} width={1400} height={1000} className="max-h-full w-full rounded-[1.5rem] object-cover" />
                   <figcaption className="absolute inset-x-0 bottom-6 text-center text-sm text-muted-foreground">
                     {g.caption}
                   </figcaption>
@@ -236,7 +241,7 @@ export function ProductPage() {
             { img: mediaUrl(spotlightImg), title: "Find it, instantly.", body: "System-wide search meets ambient intelligence." },
           ].map((f) => (
             <article key={f.title} className="card-lift overflow-hidden rounded-[2rem] bg-surface-elevated">
-              <img src={f.img} alt="" className="h-64 w-full object-cover" />
+              <img src={f.img} alt="" loading="lazy" decoding="async" sizes={SIZES.tile} width={1400} height={900} className="h-64 w-full object-cover" />
               <div className="p-8">
                 <h3 className="text-2xl font-semibold tracking-tight">{f.title}</h3>
                 <p className="mt-2 text-muted-foreground">{f.body}</p>
@@ -323,7 +328,12 @@ export function ProductPage() {
               <div className="aspect-square overflow-hidden">
                 <img
                   src={r.img}
-                  alt={r.name}
+                  alt={`${r.name} accessory`}
+                  loading="lazy"
+                  decoding="async"
+                  sizes={SIZES.card}
+                  width={800}
+                  height={800}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 />
               </div>

@@ -35,7 +35,12 @@ export function Hero() {
           <div className="absolute inset-x-0 -bottom-10 top-10 -z-10 rounded-[3rem] bg-gradient-to-b from-surface-elevated to-transparent" />
           <img
             src={mediaUrl(hero)}
-            alt="Product hero"
+            alt="iPhone 17 Pro in aerospace-grade titanium, shown at an angle"
+            sizes={SIZES.hero}
+            width={1600}
+            height={1000}
+            fetchPriority="high"
+            decoding="async"
             className="mx-auto w-full max-w-[1100px] rounded-[2rem]"
           />
         </div>

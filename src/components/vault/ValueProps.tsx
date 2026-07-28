@@ -86,6 +86,11 @@ function TileLarge({
       <img
         src={image}
         alt=""
+        loading="lazy"
+        decoding="async"
+        sizes={SIZES.tile}
+        width={1200}
+        height={800}
         className="absolute inset-x-0 bottom-0 h-[58%] w-full object-cover"
       />
     </article>

@@ -133,7 +133,12 @@ function FeatureCard({ feature }: { feature: Feature }) {
       </div>
       <img
         src={feature.image}
-        alt={feature.name}
+        alt={`${feature.name} — ${feature.tagline ?? "featured product"}`}
+        loading="lazy"
+        decoding="async"
+        sizes={SIZES.tile}
+        width={1400}
+        height={900}
         className="absolute inset-x-0 bottom-0 h-[62%] w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
       />
     </article>
