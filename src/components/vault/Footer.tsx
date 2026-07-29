@@ -1,6 +1,4 @@
-import wordmark from "@/assets/vault-wordmark.asset.json";
-import mark from "@/assets/vault-mark.asset.json";
-import { mediaUrl, SIZES } from "@/lib/media";
+import { Logo } from "./Logo";
 
 const COLUMNS: { title: string; links: string[] }[] = [
   {
@@ -48,18 +46,10 @@ export function Footer() {
       <div className="mx-auto max-w-[1440px] px-6 py-20">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-5">
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-3">
-              <img
-                src={mediaUrl(mark)}
-                alt="The Vault logo"
-                width={64}
-                height={64}
-                loading="lazy"
-                decoding="async"
-                className="h-7 w-7 rounded-[0.5rem] object-contain"
-              />
-              <img src={mediaUrl(wordmark)} alt="The Vault" className="h-3 w-auto opacity-80" />
-            </div>
+            <Logo
+              markClassName="h-8 w-8 rounded-[0.5rem]"
+              wordmarkClassName="h-4 w-auto opacity-85"
+            />
             <p className="mt-5 max-w-[26ch] text-sm text-muted-foreground">
               An Apple Authorized Reseller. Meticulously curated.
             </p>
