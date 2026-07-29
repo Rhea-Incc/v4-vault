@@ -11,10 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MacRouteImport } from './routes/mac'
 import { Route as IphoneRouteImport } from './routes/iphone'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as IphoneIndexRouteImport } from './routes/iphone.index'
 import { Route as IphoneModelRouteImport } from './routes/iphone.$model'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
+import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 
 const MacRoute = MacRouteImport.update({
   id: '/mac',
@@ -26,9 +30,18 @@ const IphoneRoute = IphoneRouteImport.update({
   path: '/iphone',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -46,28 +59,48 @@ const IphoneModelRoute = IphoneModelRouteImport.update({
   path: '/$model',
   getParentRoute: () => IphoneRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/auth': typeof AuthRoute
   '/iphone': typeof IphoneRouteWithChildren
   '/mac': typeof MacRoute
+  '/account': typeof AuthenticatedAccountRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone/': typeof IphoneIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/auth': typeof AuthRoute
   '/mac': typeof MacRoute
+  '/account': typeof AuthenticatedAccountRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone': typeof IphoneIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/accessories': typeof AccessoriesRoute
+  '/auth': typeof AuthRoute
   '/iphone': typeof IphoneRouteWithChildren
   '/mac': typeof MacRoute
+  '/_authenticated/account': typeof AuthenticatedAccountRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone/': typeof IphoneIndexRoute
 }
@@ -76,25 +109,42 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessories'
+    | '/auth'
     | '/iphone'
     | '/mac'
+    | '/account'
+    | '/admin'
     | '/iphone/$model'
     | '/iphone/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/accessories' | '/mac' | '/iphone/$model' | '/iphone'
+  to:
+    | '/'
+    | '/accessories'
+    | '/auth'
+    | '/mac'
+    | '/account'
+    | '/admin'
+    | '/iphone/$model'
+    | '/iphone'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/accessories'
+    | '/auth'
     | '/iphone'
     | '/mac'
+    | '/_authenticated/account'
+    | '/_authenticated/admin'
     | '/iphone/$model'
     | '/iphone/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AccessoriesRoute: typeof AccessoriesRoute
+  AuthRoute: typeof AuthRoute
   IphoneRoute: typeof IphoneRouteWithChildren
   MacRoute: typeof MacRoute
 }
@@ -115,11 +165,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IphoneRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accessories': {
       id: '/accessories'
       path: '/accessories'
       fullPath: '/accessories'
       preLoaderRoute: typeof AccessoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -143,8 +207,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IphoneModelRouteImport
       parentRoute: typeof IphoneRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/account': {
+      id: '/_authenticated/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AuthenticatedAccountRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAccountRoute: AuthenticatedAccountRoute,
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface IphoneRouteChildren {
   IphoneModelRoute: typeof IphoneModelRoute
@@ -161,7 +252,9 @@ const IphoneRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AccessoriesRoute: AccessoriesRoute,
+  AuthRoute: AuthRoute,
   IphoneRoute: IphoneRouteWithChildren,
   MacRoute: MacRoute,
 }

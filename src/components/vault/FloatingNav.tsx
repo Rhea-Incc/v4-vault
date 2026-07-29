@@ -1,12 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
-import wordmark from "@/assets/vault-wordmark.asset.json";
-import mark from "@/assets/vault-mark.asset.json";
-import { mediaUrl } from "@/lib/media";
-import { IPHONES, MACS } from "@/lib/catalog";
-
-const wordmarkUrl = mediaUrl(wordmark);
+import { IPHONE_GENERATIONS, MACS } from "@/lib/catalog";
+import { Logo } from "./Logo";
 
 const TABS = [
   { label: "Mac", to: "/mac" as const },
@@ -48,23 +44,7 @@ export function FloatingNav() {
             scrolled ? "h-12 px-3 sm:h-14 sm:px-5" : "h-14 px-4 sm:h-16 sm:px-7"
           }`}
         >
-          <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="The Vault home">
-            <img
-              src={mediaUrl(mark)}
-              alt=""
-              aria-hidden
-              width={64}
-              height={64}
-              className="h-6 w-6 rounded-[0.45rem] object-contain sm:h-7 sm:w-7"
-            />
-            <img
-              src={wordmarkUrl}
-              alt="The Vault"
-              width={220}
-              height={32}
-              className="h-3 w-auto opacity-90 sm:h-3.5"
-            />
-          </Link>
+          <Logo />
 
           <ul className="hidden min-w-0 items-center justify-center gap-1 lg:flex">
             {TABS.map((item) => (
@@ -145,20 +125,29 @@ export function FloatingNav() {
                 </div>
                 <div>
                   <p className="eyebrow mb-3">iPhone lineup</p>
-                  <ul className="grid grid-cols-2 gap-1 sm:grid-cols-3">
-                    {IPHONES.map((m) => (
-                      <li key={m.slug}>
-                        <Link
-                          to="/iphone/$model"
-                          params={{ model: m.slug }}
-                          onClick={() => setOpen(false)}
-                          className="block rounded-2xl px-3 py-3 text-sm text-foreground/85 transition-colors hover:bg-surface-elevated"
-                        >
-                          {m.name}
-                        </Link>
-                      </li>
+                  <div className="space-y-4">
+                    {IPHONE_GENERATIONS.map((g) => (
+                      <div key={g.generation}>
+                        <p className="px-3 text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                          iPhone {g.generation} · {g.year}
+                        </p>
+                        <ul className="mt-1 grid grid-cols-2 gap-1 sm:grid-cols-3">
+                          {g.models.map((m) => (
+                            <li key={m.slug}>
+                              <Link
+                                to="/iphone/$model"
+                                params={{ model: m.slug }}
+                                onClick={() => setOpen(false)}
+                                className="block rounded-2xl px-3 py-3 text-sm text-foreground/85 transition-colors hover:bg-surface-elevated"
+                              >
+                                {m.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
                 <div>
                   <p className="eyebrow mb-3">Mac lineup</p>
