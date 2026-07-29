@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import wordmark from "@/assets/vault-wordmark.asset.json";
+import mark from "@/assets/vault-mark.asset.json";
 import { mediaUrl } from "@/lib/media";
 import { IPHONES, MACS } from "@/lib/catalog";
 
@@ -48,6 +49,14 @@ export function FloatingNav() {
           }`}
         >
           <Link to="/" className="flex shrink-0 items-center gap-2" aria-label="The Vault home">
+            <img
+              src={mediaUrl(mark)}
+              alt=""
+              aria-hidden
+              width={64}
+              height={64}
+              className="h-6 w-6 rounded-[0.45rem] object-contain sm:h-7 sm:w-7"
+            />
             <img
               src={wordmarkUrl}
               alt="The Vault"
