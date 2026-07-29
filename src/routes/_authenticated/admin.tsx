@@ -86,7 +86,7 @@ function AdminRoute() {
   });
 
   const updateOrder = useMutation({
-    mutationFn: async ({ id, patch }: { id: string; patch: Record<string, unknown> }) => {
+    mutationFn: async ({ id, patch }: { id: string; patch: { delivery_status?: string; courier?: string; tracking_number?: string; status?: string } }) => {
       const { error } = await supabase.from("orders").update(patch).eq("id", id);
       if (error) throw error;
     },
