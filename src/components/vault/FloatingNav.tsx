@@ -68,12 +68,13 @@ export function FloatingNav() {
             >
               <Search className="h-[18px] w-[18px]" strokeWidth={1.6} />
             </button>
-            <button
+            <Link
+              to="/auth"
               aria-label="Account"
               className="hidden h-11 w-11 place-items-center rounded-full text-foreground/70 transition-colors hover:bg-surface-elevated hover:text-foreground sm:grid"
             >
               <User className="h-[18px] w-[18px]" strokeWidth={1.6} />
-            </button>
+            </Link>
             <button
               aria-label="Bag"
               className="grid h-11 w-11 place-items-center rounded-full text-foreground/70 transition-colors hover:bg-surface-elevated hover:text-foreground"
