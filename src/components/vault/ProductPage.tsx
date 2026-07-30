@@ -10,7 +10,7 @@ import esimImg from "@/assets/product/esim.jpg.asset.json";
 import spotlightImg from "@/assets/product/spotlight.jpg.asset.json";
 import macbookImg from "@/assets/product/macbook.jpg.asset.json";
 import { mediaUrl, SIZES } from "@/lib/media";
-import { formatKes } from "@/lib/pricing";
+import { formatKes, fromKes } from "@/lib/pricing";
 import { AddToBag } from "./AddToBag";
 import { MediaReel } from "./MediaReel";
 import { REELS } from "@/lib/catalog";
@@ -52,16 +52,16 @@ const SPECS = [
 ];
 
 const RECOMMENDATIONS = [
-  { name: "MagSafe Charger", tag: "Accessory", price: "$39", img: mediaUrl(macbookImg) },
-  { name: "AirPods Pro", tag: "Audio", price: "$249", img: mediaUrl(iosImg) },
-  { name: "Leather Case with MagSafe", tag: "Case", price: "$59", img: mediaUrl(lockscreenImg) },
-  { name: "20W USB-C Adapter", tag: "Power", price: "$19", img: mediaUrl(batteryImg) },
+  { name: "MagSafe Charger", tag: "Accessory", price: formatKes(4900), img: mediaUrl(macbookImg) },
+  { name: "AirPods Pro", tag: "Audio", price: formatKes(32900), img: mediaUrl(iosImg) },
+  { name: "Leather Case with MagSafe", tag: "Case", price: formatKes(7900), img: mediaUrl(lockscreenImg) },
+  { name: "20W USB-C Adapter", tag: "Power", price: formatKes(2500), img: mediaUrl(batteryImg) },
 ];
 
 const COMPARE = [
-  { name: "iPhone 17", chip: "A19", camera: "48MP · 3x tele", battery: "29 hrs", price: "From $799" },
-  { name: "iPhone 17 Pro", chip: "A19 Pro", camera: "48MP · 5x tele", battery: "33 hrs", price: "From $1,099" },
-  { name: "iPhone Air", chip: "A19", camera: "48MP Fusion", battery: "27 hrs", price: "From $699" },
+  { name: "iPhone 17", chip: "A19", camera: "48MP · 3x tele", battery: "29 hrs", price: fromKes(103900) },
+  { name: "iPhone 17 Pro", chip: "A19 Pro", camera: "48MP · 5x tele", battery: "33 hrs", price: fromKes(142900) },
+  { name: "iPhone Air", chip: "A19", camera: "48MP Fusion", battery: "27 hrs", price: fromKes(90900) },
 ];
 
 export function ProductPage() {
