@@ -1,6 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { MACS, MEDIA } from "@/lib/catalog";
 import { SIZES } from "@/lib/media";
+import { MediaReel } from "./MediaReel";
+import { REELS } from "@/lib/catalog";
+import { AddToBag } from "./AddToBag";
 
 export function MacPage() {
   return (
@@ -62,6 +65,13 @@ export function MacPage() {
                     ))}
                   </ul>
                   <p className="mt-auto pt-5 text-sm font-medium">{m.price}</p>
+                  <AddToBag
+                    className="mt-4"
+                    slug={m.slug}
+                    name={m.name}
+                    fallbackKes={m.priceKes ?? 0}
+                    image={m.image}
+                  />
                 </div>
               </article>
             </li>
@@ -105,6 +115,14 @@ export function MacPage() {
               </p>
             </figcaption>
           </figure>
+        </div>
+
+        <div className="mt-12 overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
+          <MediaReel
+            src={REELS.three}
+            label="Mac in motion — studio reel"
+            aspect="aspect-[4/5] sm:aspect-[16/9]"
+          />
         </div>
 
         <div className="mt-12 flex flex-wrap gap-3">

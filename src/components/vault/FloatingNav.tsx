@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { IPHONE_GENERATIONS, MACS } from "@/lib/catalog";
 import { Logo } from "./Logo";
+import { useCart } from "@/lib/cart";
 
 const TABS = [
   { label: "Mac", to: "/mac" as const },
@@ -12,6 +13,7 @@ const TABS = [
 
 export function FloatingNav() {
   const [scrolled, setScrolled] = useState(false);
+  const cart = useCart();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -76,10 +78,16 @@ export function FloatingNav() {
               <User className="h-[18px] w-[18px]" strokeWidth={1.6} />
             </Link>
             <button
-              aria-label="Bag"
-              className="grid h-11 w-11 place-items-center rounded-full text-foreground/70 transition-colors hover:bg-surface-elevated hover:text-foreground"
+              aria-label={`Bag, ${cart.count} item${cart.count === 1 ? "" : "s"}`}
+              onClick={() => cart.setOpen(true)}
+              className="relative grid h-11 w-11 place-items-center rounded-full text-foreground/70 transition-colors hover:bg-surface-elevated hover:text-foreground"
             >
               <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={1.6} />
+              {cart.count > 0 && (
+                <span className="absolute right-1 top-1 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 text-[10px] font-medium text-background">
+                  {cart.count}
+                </span>
+              )}
             </button>
             <button
               aria-label={open ? "Close menu" : "Open menu"}

@@ -123,11 +123,12 @@ export function CategoryRail() {
           ))}
         </ul>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <MediaReel src={REELS.one} label="The Vault in motion — hardware detail reel" />
-          <MediaReel src={REELS.two} label="The Vault in motion — everyday carry reel" />
-          <MediaReel src={REELS.three} label="The Vault in motion — audio reel" />
-          <MediaReel src={REELS.four} label="The Vault in motion — studio reel" />
+        <div className="mt-14 overflow-hidden rounded-[1.5rem] sm:rounded-[2.5rem]">
+          <MediaReel
+            src={REELS.one}
+            label="The Vault in motion — flagship reel"
+            aspect="aspect-[4/5] sm:aspect-[21/9]"
+          />
         </div>
       </div>
     </section>

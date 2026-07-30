@@ -473,7 +473,9 @@ function buildGeneration(base: Model): Model[] {
       display: v.display ?? base.display,
       priceKes: kes,
       price: fromKes(kes),
-      storage: v.suffix.includes("Pro") ? [...base.storage.slice(1), "1TB"] : base.storage,
+      storage: v.suffix.includes("Pro")
+        ? Array.from(new Set([...base.storage.slice(1), "1TB"]))
+        : base.storage,
       alt: `${base.name} ${v.suffix} shown from the front and back`,
     };
   });

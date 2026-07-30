@@ -17,6 +17,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as IphoneIndexRouteImport } from './routes/iphone.index'
 import { Route as IphoneModelRouteImport } from './routes/iphone.$model'
+import { Route as AuthenticatedCheckoutRouteImport } from './routes/_authenticated/checkout'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 
@@ -59,6 +60,11 @@ const IphoneModelRoute = IphoneModelRouteImport.update({
   path: '/$model',
   getParentRoute: () => IphoneRoute,
 } as any)
+const AuthenticatedCheckoutRoute = AuthenticatedCheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/mac': typeof MacRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/checkout': typeof AuthenticatedCheckoutRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone/': typeof IphoneIndexRoute
 }
@@ -88,6 +95,7 @@ export interface FileRoutesByTo {
   '/mac': typeof MacRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
+  '/checkout': typeof AuthenticatedCheckoutRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone': typeof IphoneIndexRoute
 }
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   '/mac': typeof MacRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
+  '/_authenticated/checkout': typeof AuthenticatedCheckoutRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone/': typeof IphoneIndexRoute
 }
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/mac'
     | '/account'
     | '/admin'
+    | '/checkout'
     | '/iphone/$model'
     | '/iphone/'
   fileRoutesByTo: FileRoutesByTo
@@ -124,6 +134,7 @@ export interface FileRouteTypes {
     | '/mac'
     | '/account'
     | '/admin'
+    | '/checkout'
     | '/iphone/$model'
     | '/iphone'
   id:
@@ -136,6 +147,7 @@ export interface FileRouteTypes {
     | '/mac'
     | '/_authenticated/account'
     | '/_authenticated/admin'
+    | '/_authenticated/checkout'
     | '/iphone/$model'
     | '/iphone/'
   fileRoutesById: FileRoutesById
@@ -207,6 +219,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IphoneModelRouteImport
       parentRoute: typeof IphoneRoute
     }
+    '/_authenticated/checkout': {
+      id: '/_authenticated/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof AuthenticatedCheckoutRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
       path: '/admin'
@@ -227,11 +246,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
+  AuthenticatedCheckoutRoute: typeof AuthenticatedCheckoutRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAccountRoute: AuthenticatedAccountRoute,
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
+  AuthenticatedCheckoutRoute: AuthenticatedCheckoutRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

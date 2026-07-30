@@ -10,6 +10,10 @@ import esimImg from "@/assets/product/esim.jpg.asset.json";
 import spotlightImg from "@/assets/product/spotlight.jpg.asset.json";
 import macbookImg from "@/assets/product/macbook.jpg.asset.json";
 import { mediaUrl, SIZES } from "@/lib/media";
+import { formatKes, fromKes } from "@/lib/pricing";
+import { AddToBag } from "./AddToBag";
+import { MediaReel } from "./MediaReel";
+import { REELS } from "@/lib/catalog";
 
 const COLORS = [
   { id: "lavender", name: "Lavender", swatch: "oklch(0.82 0.08 300)" },
@@ -20,10 +24,10 @@ const COLORS = [
 ];
 
 const STORAGE = [
-  { id: "128", size: "128GB", price: "$799" },
-  { id: "256", size: "256GB", price: "$899" },
-  { id: "512", size: "512GB", price: "$1,099" },
-  { id: "1tb", size: "1TB", price: "$1,299" },
+  { id: "128", size: "128GB", priceKes: 103900, price: formatKes(103900) },
+  { id: "256", size: "256GB", priceKes: 116900, price: formatKes(116900) },
+  { id: "512", size: "512GB", priceKes: 142900, price: formatKes(142900) },
+  { id: "1tb", size: "1TB", priceKes: 168900, price: formatKes(168900) },
 ];
 
 const GALLERY = [
@@ -48,16 +52,16 @@ const SPECS = [
 ];
 
 const RECOMMENDATIONS = [
-  { name: "MagSafe Charger", tag: "Accessory", price: "$39", img: mediaUrl(macbookImg) },
-  { name: "AirPods Pro", tag: "Audio", price: "$249", img: mediaUrl(iosImg) },
-  { name: "Leather Case with MagSafe", tag: "Case", price: "$59", img: mediaUrl(lockscreenImg) },
-  { name: "20W USB-C Adapter", tag: "Power", price: "$19", img: mediaUrl(batteryImg) },
+  { name: "MagSafe Charger", tag: "Accessory", price: formatKes(4900), img: mediaUrl(macbookImg) },
+  { name: "AirPods Pro", tag: "Audio", price: formatKes(32900), img: mediaUrl(iosImg) },
+  { name: "Leather Case with MagSafe", tag: "Case", price: formatKes(7900), img: mediaUrl(lockscreenImg) },
+  { name: "20W USB-C Adapter", tag: "Power", price: formatKes(2500), img: mediaUrl(batteryImg) },
 ];
 
 const COMPARE = [
-  { name: "iPhone 17", chip: "A19", camera: "48MP · 3x tele", battery: "29 hrs", price: "From $799" },
-  { name: "iPhone 17 Pro", chip: "A19 Pro", camera: "48MP · 5x tele", battery: "33 hrs", price: "From $1,099" },
-  { name: "iPhone Air", chip: "A19", camera: "48MP Fusion", battery: "27 hrs", price: "From $699" },
+  { name: "iPhone 17", chip: "A19", camera: "48MP · 3x tele", battery: "29 hrs", price: fromKes(103900) },
+  { name: "iPhone 17 Pro", chip: "A19 Pro", camera: "48MP · 5x tele", battery: "33 hrs", price: fromKes(142900) },
+  { name: "iPhone Air", chip: "A19", camera: "48MP Fusion", battery: "27 hrs", price: fromKes(90900) },
 ];
 
 export function ProductPage() {
@@ -216,9 +220,13 @@ export function ProductPage() {
                   <span className="text-2xl font-semibold tracking-tight">{selectedStorage.price}</span>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <button className="btn-pill w-full bg-foreground text-background hover:bg-foreground/90">
-                    Add to Bag
-                  </button>
+                  <AddToBag
+                    slug="17"
+                    name={`iPhone 17 · ${selectedStorage.size}`}
+                    fallbackKes={selectedStorage.priceKes}
+                    image={mediaUrl(heroImg)}
+                    variant={{ Storage: selectedStorage.size }}
+                  />
                   <button className="btn-pill w-full text-accent hover:bg-accent/8">
                     Reserve in-store <ChevronRight className="h-4 w-4" strokeWidth={1.8} />
                   </button>

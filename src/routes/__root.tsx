@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
+import { CartProvider } from "../lib/cart";
+import { CartDrawer } from "../components/vault/CartDrawer";
+import { PreviewBanner } from "../components/vault/PreviewBanner";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -123,8 +126,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CartProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        <CartDrawer />
+        <PreviewBanner />
+      </CartProvider>
       <Analytics />
     </QueryClientProvider>
   );
