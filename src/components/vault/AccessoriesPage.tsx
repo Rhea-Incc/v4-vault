@@ -3,6 +3,9 @@ import { Link } from "@tanstack/react-router";
 import { ACCESSORIES, type Accessory } from "@/lib/catalog";
 import { SIZES } from "@/lib/media";
 import { AccessoryQuickView } from "./AccessoryQuickView";
+import { MediaReel } from "./MediaReel";
+import { REELS } from "@/lib/catalog";
+import { StockBadge } from "./AddToBag";
 
 export function AccessoriesPage() {
   const [active, setActive] = useState<Accessory | null>(null);
@@ -66,11 +69,20 @@ export function AccessoriesPage() {
                   <h2 className="mt-1 text-base font-medium">{a.name}</h2>
                   <p className="mt-1 text-sm text-muted-foreground">{a.price}</p>
                   <p className="mt-3 line-clamp-2 text-sm text-muted-foreground">{a.summary}</p>
+                  <StockBadge slug={a.id} className="mt-3" />
                 </div>
               </button>
             </li>
           ))}
         </ul>
+
+        <div className="mt-12 overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
+          <MediaReel
+            src={REELS.four}
+            label="Accessories in motion — studio reel"
+            aspect="aspect-[4/5] sm:aspect-[16/9]"
+          />
+        </div>
 
         <div className="mt-12">
           <Link to="/iphone" className="btn-pill border border-hairline hover:bg-surface-elevated">

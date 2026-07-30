@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { X } from "lucide-react";
 import { SIZES } from "@/lib/media";
 import type { Accessory } from "@/lib/catalog";
+import { AddToBag } from "./AddToBag";
 
 export function AccessoryQuickView({
   accessory,
@@ -92,9 +93,14 @@ export function AccessoryQuickView({
               ))}
             </dl>
 
-            <button className="btn-pill mt-6 w-full bg-accent text-background hover:opacity-90">
-              Add to Bag · {accessory.price}
-            </button>
+            <AddToBag
+              className="mt-6"
+              slug={accessory.id}
+              name={accessory.name}
+              fallbackKes={accessory.priceKes}
+              image={accessory.image}
+              showPrice
+            />
           </div>
         </div>
       </div>

@@ -1,6 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { IPHONES, MEDIA } from "@/lib/catalog";
 import { SIZES } from "@/lib/media";
+import { MediaReel } from "./MediaReel";
+import { REELS } from "@/lib/catalog";
+import { StockBadge } from "./AddToBag";
 
 export function IPhoneLineupPage() {
   return (
@@ -61,11 +64,22 @@ export function IPhoneLineupPage() {
                   <h3 className="mt-1 text-xl font-semibold tracking-tight">{m.name}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{m.tagline}</p>
                   <p className="mt-auto pt-5 text-sm font-medium">{m.price}</p>
+                  <StockBadge slug={m.slug} className="mt-2" />
                 </div>
               </Link>
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-4 pb-4 sm:px-6 sm:pb-8">
+        <div className="overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
+          <MediaReel
+            src={REELS.two}
+            label="iPhone in motion — lineup reel"
+            aspect="aspect-[4/5] sm:aspect-[16/9]"
+          />
+        </div>
       </section>
 
       <section className="border-t border-hairline bg-surface">
