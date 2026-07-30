@@ -2,11 +2,16 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ACCESSORIES, IPHONES, type Model } from "@/lib/catalog";
 import { SIZES } from "@/lib/media";
+import { AddToBag } from "./AddToBag";
+import { MediaReel } from "./MediaReel";
+import { REELS } from "@/lib/catalog";
+import { usePriceMap, livePrice } from "@/lib/store";
 
 export function ModelPage({ model }: { model: Model }) {
   const [color, setColor] = useState(model.colors[0].name);
   const [storage, setStorage] = useState(model.storage[0]);
   const others = IPHONES.filter((m) => m.slug !== model.slug).slice(0, 4);
+  const prices = usePriceMap();
 
   return (
     <div className="pt-28 sm:pt-32">
@@ -110,10 +115,17 @@ export function ModelPage({ model }: { model: Model }) {
               <p className="mt-1 text-sm text-muted-foreground">
                 {color} · {storage}
               </p>
-              <p className="mt-6 text-2xl font-semibold">{model.price}</p>
-              <button className="btn-pill mt-6 w-full bg-accent text-background hover:opacity-90">
-                Add to Bag
-              </button>
+              <p className="mt-6 text-2xl font-semibold">
+                {livePrice(prices, model.slug, model.price)}
+              </p>
+              <AddToBag
+                className="mt-6"
+                slug={model.slug}
+                name={`${model.name} · ${storage} · ${color}`}
+                fallbackKes={model.priceKes ?? 0}
+                image={model.image}
+                variant={{ Finish: color, Storage: storage }}
+              />
               <p className="mt-4 text-xs text-muted-foreground">
                 Free delivery. AppleCare+ available at checkout.
               </p>
@@ -148,6 +160,18 @@ export function ModelPage({ model }: { model: Model }) {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* Reel */}
+      <section className="mx-auto max-w-[1440px] px-4 py-12 sm:px-6 sm:py-20">
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-4xl">iPhone in motion.</h2>
+        <div className="mt-8 overflow-hidden rounded-[1.5rem] sm:rounded-[2rem]">
+          <MediaReel
+            src={REELS.two}
+            label="iPhone hardware detail reel"
+            aspect="aspect-[4/5] sm:aspect-[16/9]"
+          />
         </div>
       </section>
 
