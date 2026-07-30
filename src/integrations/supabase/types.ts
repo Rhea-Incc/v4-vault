@@ -71,6 +71,9 @@ export type Database = {
           estimated_delivery: string | null
           id: string
           order_number: string
+          paid_at: string | null
+          payment_method: string | null
+          payment_reference: string | null
           status: string
           total_kes: number
           tracking_number: string | null
@@ -85,6 +88,9 @@ export type Database = {
           estimated_delivery?: string | null
           id?: string
           order_number?: string
+          paid_at?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
           status?: string
           total_kes?: number
           tracking_number?: string | null
@@ -99,6 +105,9 @@ export type Database = {
           estimated_delivery?: string | null
           id?: string
           order_number?: string
+          paid_at?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
           status?: string
           total_kes?: number
           tracking_number?: string | null
@@ -114,6 +123,7 @@ export type Database = {
           created_at: string
           description: string | null
           details: Json
+          draft: Json
           id: string
           image_url: string | null
           in_stock: boolean
@@ -131,6 +141,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           details?: Json
+          draft?: Json
           id?: string
           image_url?: string | null
           in_stock?: boolean
@@ -148,6 +159,7 @@ export type Database = {
           created_at?: string
           description?: string | null
           details?: Json
+          draft?: Json
           id?: string
           image_url?: string | null
           in_stock?: boolean
