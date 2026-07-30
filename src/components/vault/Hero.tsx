@@ -27,7 +27,7 @@ export function Hero() {
             </button>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
-            From $1,199 · or $49.95/mo. for 24 mo.
+            From KSh 155,900 · or KSh 6,500/mo. for 24 months.
           </p>
         </div>
 
