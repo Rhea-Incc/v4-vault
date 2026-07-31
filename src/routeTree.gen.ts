@@ -9,10 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WishlistRouteImport } from './routes/wishlist'
+import { Route as TradeInRouteImport } from './routes/trade-in'
+import { Route as SupportRouteImport } from './routes/support'
+import { Route as StoresRouteImport } from './routes/stores'
+import { Route as ReturnsRouteImport } from './routes/returns'
+import { Route as RepairStatusRouteImport } from './routes/repair-status'
+import { Route as PressRouteImport } from './routes/press'
+import { Route as NewsroomRouteImport } from './routes/newsroom'
+import { Route as NewsletterRouteImport } from './routes/newsletter'
 import { Route as MacRouteImport } from './routes/mac'
 import { Route as IphoneRouteImport } from './routes/iphone'
+import { Route as FinancingRouteImport } from './routes/financing'
+import { Route as EducationRouteImport } from './routes/education'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CareersRouteImport } from './routes/careers'
+import { Route as BusinessRouteImport } from './routes/business'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ApplecareRouteImport } from './routes/applecare'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as IphoneIndexRouteImport } from './routes/iphone.index'
@@ -21,6 +37,51 @@ import { Route as AuthenticatedCheckoutRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TradeInRoute = TradeInRouteImport.update({
+  id: '/trade-in',
+  path: '/trade-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoresRoute = StoresRouteImport.update({
+  id: '/stores',
+  path: '/stores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReturnsRoute = ReturnsRouteImport.update({
+  id: '/returns',
+  path: '/returns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RepairStatusRoute = RepairStatusRouteImport.update({
+  id: '/repair-status',
+  path: '/repair-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PressRoute = PressRouteImport.update({
+  id: '/press',
+  path: '/press',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsroomRoute = NewsroomRouteImport.update({
+  id: '/newsroom',
+  path: '/newsroom',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsletterRoute = NewsletterRouteImport.update({
+  id: '/newsletter',
+  path: '/newsletter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MacRoute = MacRouteImport.update({
   id: '/mac',
   path: '/mac',
@@ -31,14 +92,49 @@ const IphoneRoute = IphoneRouteImport.update({
   path: '/iphone',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FinancingRoute = FinancingRouteImport.update({
+  id: '/financing',
+  path: '/financing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationRoute = EducationRouteImport.update({
+  id: '/education',
+  path: '/education',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CareersRoute = CareersRouteImport.update({
+  id: '/careers',
+  path: '/careers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BusinessRoute = BusinessRouteImport.update({
+  id: '/business',
+  path: '/business',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApplecareRoute = ApplecareRouteImport.update({
+  id: '/applecare',
+  path: '/applecare',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
@@ -78,10 +174,26 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/applecare': typeof ApplecareRoute
   '/auth': typeof AuthRoute
+  '/business': typeof BusinessRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/education': typeof EducationRoute
+  '/financing': typeof FinancingRoute
   '/iphone': typeof IphoneRouteWithChildren
   '/mac': typeof MacRoute
+  '/newsletter': typeof NewsletterRoute
+  '/newsroom': typeof NewsroomRoute
+  '/press': typeof PressRoute
+  '/repair-status': typeof RepairStatusRoute
+  '/returns': typeof ReturnsRoute
+  '/stores': typeof StoresRoute
+  '/support': typeof SupportRoute
+  '/trade-in': typeof TradeInRoute
+  '/wishlist': typeof WishlistRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/checkout': typeof AuthenticatedCheckoutRoute
@@ -90,9 +202,25 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/applecare': typeof ApplecareRoute
   '/auth': typeof AuthRoute
+  '/business': typeof BusinessRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/education': typeof EducationRoute
+  '/financing': typeof FinancingRoute
   '/mac': typeof MacRoute
+  '/newsletter': typeof NewsletterRoute
+  '/newsroom': typeof NewsroomRoute
+  '/press': typeof PressRoute
+  '/repair-status': typeof RepairStatusRoute
+  '/returns': typeof ReturnsRoute
+  '/stores': typeof StoresRoute
+  '/support': typeof SupportRoute
+  '/trade-in': typeof TradeInRoute
+  '/wishlist': typeof WishlistRoute
   '/account': typeof AuthenticatedAccountRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/checkout': typeof AuthenticatedCheckoutRoute
@@ -103,10 +231,26 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/applecare': typeof ApplecareRoute
   '/auth': typeof AuthRoute
+  '/business': typeof BusinessRoute
+  '/careers': typeof CareersRoute
+  '/contact': typeof ContactRoute
+  '/education': typeof EducationRoute
+  '/financing': typeof FinancingRoute
   '/iphone': typeof IphoneRouteWithChildren
   '/mac': typeof MacRoute
+  '/newsletter': typeof NewsletterRoute
+  '/newsroom': typeof NewsroomRoute
+  '/press': typeof PressRoute
+  '/repair-status': typeof RepairStatusRoute
+  '/returns': typeof ReturnsRoute
+  '/stores': typeof StoresRoute
+  '/support': typeof SupportRoute
+  '/trade-in': typeof TradeInRoute
+  '/wishlist': typeof WishlistRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/checkout': typeof AuthenticatedCheckoutRoute
@@ -117,10 +261,26 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/accessories'
+    | '/applecare'
     | '/auth'
+    | '/business'
+    | '/careers'
+    | '/contact'
+    | '/education'
+    | '/financing'
     | '/iphone'
     | '/mac'
+    | '/newsletter'
+    | '/newsroom'
+    | '/press'
+    | '/repair-status'
+    | '/returns'
+    | '/stores'
+    | '/support'
+    | '/trade-in'
+    | '/wishlist'
     | '/account'
     | '/admin'
     | '/checkout'
@@ -129,9 +289,25 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/accessories'
+    | '/applecare'
     | '/auth'
+    | '/business'
+    | '/careers'
+    | '/contact'
+    | '/education'
+    | '/financing'
     | '/mac'
+    | '/newsletter'
+    | '/newsroom'
+    | '/press'
+    | '/repair-status'
+    | '/returns'
+    | '/stores'
+    | '/support'
+    | '/trade-in'
+    | '/wishlist'
     | '/account'
     | '/admin'
     | '/checkout'
@@ -141,10 +317,26 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/about'
     | '/accessories'
+    | '/applecare'
     | '/auth'
+    | '/business'
+    | '/careers'
+    | '/contact'
+    | '/education'
+    | '/financing'
     | '/iphone'
     | '/mac'
+    | '/newsletter'
+    | '/newsroom'
+    | '/press'
+    | '/repair-status'
+    | '/returns'
+    | '/stores'
+    | '/support'
+    | '/trade-in'
+    | '/wishlist'
     | '/_authenticated/account'
     | '/_authenticated/admin'
     | '/_authenticated/checkout'
@@ -155,14 +347,93 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  ApplecareRoute: typeof ApplecareRoute
   AuthRoute: typeof AuthRoute
+  BusinessRoute: typeof BusinessRoute
+  CareersRoute: typeof CareersRoute
+  ContactRoute: typeof ContactRoute
+  EducationRoute: typeof EducationRoute
+  FinancingRoute: typeof FinancingRoute
   IphoneRoute: typeof IphoneRouteWithChildren
   MacRoute: typeof MacRoute
+  NewsletterRoute: typeof NewsletterRoute
+  NewsroomRoute: typeof NewsroomRoute
+  PressRoute: typeof PressRoute
+  RepairStatusRoute: typeof RepairStatusRoute
+  ReturnsRoute: typeof ReturnsRoute
+  StoresRoute: typeof StoresRoute
+  SupportRoute: typeof SupportRoute
+  TradeInRoute: typeof TradeInRoute
+  WishlistRoute: typeof WishlistRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trade-in': {
+      id: '/trade-in'
+      path: '/trade-in'
+      fullPath: '/trade-in'
+      preLoaderRoute: typeof TradeInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stores': {
+      id: '/stores'
+      path: '/stores'
+      fullPath: '/stores'
+      preLoaderRoute: typeof StoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/returns': {
+      id: '/returns'
+      path: '/returns'
+      fullPath: '/returns'
+      preLoaderRoute: typeof ReturnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/repair-status': {
+      id: '/repair-status'
+      path: '/repair-status'
+      fullPath: '/repair-status'
+      preLoaderRoute: typeof RepairStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/press': {
+      id: '/press'
+      path: '/press'
+      fullPath: '/press'
+      preLoaderRoute: typeof PressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newsroom': {
+      id: '/newsroom'
+      path: '/newsroom'
+      fullPath: '/newsroom'
+      preLoaderRoute: typeof NewsroomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newsletter': {
+      id: '/newsletter'
+      path: '/newsletter'
+      fullPath: '/newsletter'
+      preLoaderRoute: typeof NewsletterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/mac': {
       id: '/mac'
       path: '/mac'
@@ -177,6 +448,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IphoneRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/financing': {
+      id: '/financing'
+      path: '/financing'
+      fullPath: '/financing'
+      preLoaderRoute: typeof FinancingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education': {
+      id: '/education'
+      path: '/education'
+      fullPath: '/education'
+      preLoaderRoute: typeof EducationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/careers': {
+      id: '/careers'
+      path: '/careers'
+      fullPath: '/careers'
+      preLoaderRoute: typeof CareersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/business': {
+      id: '/business'
+      path: '/business'
+      fullPath: '/business'
+      preLoaderRoute: typeof BusinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -184,11 +490,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/applecare': {
+      id: '/applecare'
+      path: '/applecare'
+      fullPath: '/applecare'
+      preLoaderRoute: typeof ApplecareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accessories': {
       id: '/accessories'
       path: '/accessories'
       fullPath: '/accessories'
       preLoaderRoute: typeof AccessoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -274,10 +594,26 @@ const IphoneRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AboutRoute: AboutRoute,
   AccessoriesRoute: AccessoriesRoute,
+  ApplecareRoute: ApplecareRoute,
   AuthRoute: AuthRoute,
+  BusinessRoute: BusinessRoute,
+  CareersRoute: CareersRoute,
+  ContactRoute: ContactRoute,
+  EducationRoute: EducationRoute,
+  FinancingRoute: FinancingRoute,
   IphoneRoute: IphoneRouteWithChildren,
   MacRoute: MacRoute,
+  NewsletterRoute: NewsletterRoute,
+  NewsroomRoute: NewsroomRoute,
+  PressRoute: PressRoute,
+  RepairStatusRoute: RepairStatusRoute,
+  ReturnsRoute: ReturnsRoute,
+  StoresRoute: StoresRoute,
+  SupportRoute: SupportRoute,
+  TradeInRoute: TradeInRoute,
+  WishlistRoute: WishlistRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
