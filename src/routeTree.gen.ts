@@ -36,6 +36,8 @@ import { Route as IphoneModelRouteImport } from './routes/iphone.$model'
 import { Route as AuthenticatedCheckoutRouteImport } from './routes/_authenticated/checkout'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
+import { Route as ApiPublicPaymentsPaystackRouteImport } from './routes/api/public/payments.paystack'
+import { Route as ApiPublicPaymentsMpesaRouteImport } from './routes/api/public/payments.mpesa'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
@@ -171,6 +173,17 @@ const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const ApiPublicPaymentsPaystackRoute =
+  ApiPublicPaymentsPaystackRouteImport.update({
+    id: '/api/public/payments/paystack',
+    path: '/api/public/payments/paystack',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicPaymentsMpesaRoute = ApiPublicPaymentsMpesaRouteImport.update({
+  id: '/api/public/payments/mpesa',
+  path: '/api/public/payments/mpesa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -199,6 +212,8 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof AuthenticatedCheckoutRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone/': typeof IphoneIndexRoute
+  '/api/public/payments/mpesa': typeof ApiPublicPaymentsMpesaRoute
+  '/api/public/payments/paystack': typeof ApiPublicPaymentsPaystackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -226,6 +241,8 @@ export interface FileRoutesByTo {
   '/checkout': typeof AuthenticatedCheckoutRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone': typeof IphoneIndexRoute
+  '/api/public/payments/mpesa': typeof ApiPublicPaymentsMpesaRoute
+  '/api/public/payments/paystack': typeof ApiPublicPaymentsPaystackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -256,6 +273,8 @@ export interface FileRoutesById {
   '/_authenticated/checkout': typeof AuthenticatedCheckoutRoute
   '/iphone/$model': typeof IphoneModelRoute
   '/iphone/': typeof IphoneIndexRoute
+  '/api/public/payments/mpesa': typeof ApiPublicPaymentsMpesaRoute
+  '/api/public/payments/paystack': typeof ApiPublicPaymentsPaystackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -286,6 +305,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/iphone/$model'
     | '/iphone/'
+    | '/api/public/payments/mpesa'
+    | '/api/public/payments/paystack'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -313,6 +334,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/iphone/$model'
     | '/iphone'
+    | '/api/public/payments/mpesa'
+    | '/api/public/payments/paystack'
   id:
     | '__root__'
     | '/'
@@ -342,6 +365,8 @@ export interface FileRouteTypes {
     | '/_authenticated/checkout'
     | '/iphone/$model'
     | '/iphone/'
+    | '/api/public/payments/mpesa'
+    | '/api/public/payments/paystack'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -367,6 +392,8 @@ export interface RootRouteChildren {
   SupportRoute: typeof SupportRoute
   TradeInRoute: typeof TradeInRoute
   WishlistRoute: typeof WishlistRoute
+  ApiPublicPaymentsMpesaRoute: typeof ApiPublicPaymentsMpesaRoute
+  ApiPublicPaymentsPaystackRoute: typeof ApiPublicPaymentsPaystackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -560,6 +587,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/api/public/payments/paystack': {
+      id: '/api/public/payments/paystack'
+      path: '/api/public/payments/paystack'
+      fullPath: '/api/public/payments/paystack'
+      preLoaderRoute: typeof ApiPublicPaymentsPaystackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/payments/mpesa': {
+      id: '/api/public/payments/mpesa'
+      path: '/api/public/payments/mpesa'
+      fullPath: '/api/public/payments/mpesa'
+      preLoaderRoute: typeof ApiPublicPaymentsMpesaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -614,6 +655,8 @@ const rootRouteChildren: RootRouteChildren = {
   SupportRoute: SupportRoute,
   TradeInRoute: TradeInRoute,
   WishlistRoute: WishlistRoute,
+  ApiPublicPaymentsMpesaRoute: ApiPublicPaymentsMpesaRoute,
+  ApiPublicPaymentsPaystackRoute: ApiPublicPaymentsPaystackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

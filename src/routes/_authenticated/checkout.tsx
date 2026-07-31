@@ -7,12 +7,13 @@ import { Footer } from "@/components/vault/Footer";
 import { useCart } from "@/lib/cart";
 import { formatKes } from "@/lib/pricing";
 import { useStoreProducts } from "@/lib/store";
+import { PAYMENT_METHODS, paymentMethod, type PaymentMethodId } from "@/lib/payments";
 
 export const Route = createFileRoute("/_authenticated/checkout")({
   component: CheckoutRoute,
 });
 
-type Payment = "mpesa" | "card";
+
 
 function CheckoutRoute() {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ function CheckoutRoute() {
   const [phone, setPhone] = useState("");
   const [county, setCounty] = useState("");
   const [address, setAddress] = useState("");
-  const [method, setMethod] = useState<Payment>("mpesa");
+  const [method, setMethod] = useState<PaymentMethodId>("mpesa");
   const [reference, setReference] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [placed, setPlaced] = useState<{ id: string; number: string } | null>(null);
@@ -91,7 +92,7 @@ function CheckoutRoute() {
       if (!placed) return;
       const ref =
         reference.trim() ||
-        `${method === "mpesa" ? "MPESA" : "CARD"}-${placed.number.replace("VLT-", "")}`;
+        `${method.toUpperCase()}-${placed.number.replace("VLT-", "")}`;
       const { error: payError } = await supabase
         .from("orders")
         .update({ status: "paid", payment_reference: ref, paid_at: new Date().toISOString() })
@@ -146,12 +147,7 @@ function CheckoutRoute() {
                   <section>
                     <h2 className="text-xl font-semibold tracking-tight">Payment</h2>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      {(
-                        [
-                          { id: "mpesa" as const, label: "M-Pesa" },
-                          { id: "card" as const, label: "Card" },
-                        ]
-                      ).map((m) => (
+                      {PAYMENT_METHODS.map((m) => (
                         <button
                           key={m.id}
                           onClick={() => setMethod(m.id)}
@@ -164,6 +160,7 @@ function CheckoutRoute() {
                         </button>
                       ))}
                     </div>
+                    <p className="mt-3 text-sm text-muted-foreground">{paymentMethod(method).blurb}</p>
                   </section>
 
                   {blocked.length > 0 && (
@@ -177,12 +174,11 @@ function CheckoutRoute() {
                 <section>
                   <p className="text-sm text-muted-foreground">
                     Order <span className="font-medium text-foreground">{placed.number}</span> is reserved and
-                    awaiting payment of {formatKes(subtotalKes)} via{" "}
-                    {method === "mpesa" ? "M-Pesa" : "card"}.
+                    awaiting payment of {formatKes(subtotalKes)} via {paymentMethod(method).label}.
                   </p>
                   <div className="mt-6 max-w-sm">
                     <Field
-                      label={method === "mpesa" ? "M-Pesa transaction code" : "Card authorisation code"}
+                      label={paymentMethod(method).referenceLabel}
                       value={reference}
                       onChange={setReference}
                       placeholder="Optional — we generate one if blank"
