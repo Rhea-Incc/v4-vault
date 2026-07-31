@@ -48,7 +48,7 @@ export function FloatingNav() {
         >
           <Logo />
 
-          <ul className="hidden min-w-0 items-center justify-center gap-1 lg:flex">
+          <ul className="hidden min-w-0 items-center justify-center gap-1 md:flex">
             {TABS.map((item) => (
               <li key={item.label}>
                 <Link
@@ -61,7 +61,7 @@ export function FloatingNav() {
               </li>
             ))}
           </ul>
-          <span className="lg:hidden" aria-hidden />
+          <span className="md:hidden" aria-hidden />
 
           <div className="flex shrink-0 items-center gap-0.5 sm:gap-1">
             <button
@@ -93,7 +93,7 @@ export function FloatingNav() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="grid h-11 w-11 place-items-center rounded-full text-foreground/80 transition-colors hover:bg-surface-elevated hover:text-foreground lg:hidden"
+              className="grid h-11 w-11 place-items-center rounded-full text-foreground/80 transition-colors hover:bg-surface-elevated hover:text-foreground md:hidden"
             >
               {open ? (
                 <X className="h-5 w-5" strokeWidth={1.6} />
@@ -106,7 +106,7 @@ export function FloatingNav() {
       </div>
 
       {open && (
-        <div className="lg:hidden">
+        <div className="md:hidden">
           <button
             aria-label="Close menu"
             tabIndex={-1}
